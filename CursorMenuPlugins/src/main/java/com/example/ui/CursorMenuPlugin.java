@@ -34,16 +34,16 @@ public class CursorMenuPlugin extends JavaPlugin {
         saveDefaultConfig();
         protocolManager = ProtocolLibrary.getProtocolManager();
 
-        // Kiểm tra phiên bản cấu hình
+        // Kiểm tra ver config // check the config ver
         if (!checkConfigVersion()) {
             getLogger().warning("Config version mismatch. Updating config.yml...");
             updateConfig();
         }
 
-        // Nạp cấu hình
+        // Nạp config // Load config
         loadConfig();
 
-        // Đăng ký listener
+        // regis list
         registerUseEntityPacketListener();
 
         getCommand("reloadmenu").setExecutor(new Commands(this));
@@ -108,15 +108,15 @@ public class CursorMenuPlugin extends JavaPlugin {
     }
 
     public void reloadPluginConfig() {
-        reloadConfig(); // Nạp lại cấu hình từ file config.yml
+        reloadConfig(); // reload config
 
-        // Xóa dữ liệu cũ để tránh lỗi khi cập nhật
+        // reload
         playerCursors.clear();
         playerDisplays.clear();
         playerItemDisplays.clear();
         menuLayouts.clear();
 
-        // Nạp lại các giá trị mới từ cấu hình
+        // reload
         loadConfig();
 
         getLogger().info("Config has been successfully reloaded.");
@@ -173,13 +173,13 @@ public class CursorMenuPlugin extends JavaPlugin {
         ItemDisplay itemDisplay = spawnCursorItemDisplay(location);
         playerItemDisplays.put(player, itemDisplay);
 
-        // Gửi camera packet đến ArmorStand
+        // send camerapacket to armorstand, player
         sendCameraPacket(player, cursor);
 
         // Mount player to cursor (ArmorStand)
         mountPlayerToVehicle(player, cursor);
 
-        // Ẩn player và không cho va chạm
+        // hide player
         player.setInvisible(true);
         player.setCollidable(false);
 
@@ -251,8 +251,8 @@ public class CursorMenuPlugin extends JavaPlugin {
                 Player player = event.getPlayer();
                 if (!playerCursors.containsKey(player)) return;
 
-                float yaw = event.getPacket().getFloat().read(0); // Giá trị yaw
-                float pitch = event.getPacket().getFloat().read(1); // Giá trị pitch
+                float yaw = event.getPacket().getFloat().read(0); // yaw
+                float pitch = event.getPacket().getFloat().read(1); // pitch
 
                 yaw = normalizeYaw(yaw + (float) cursorOffsetYaw);
                 pitch = clampPitch(pitch + (float) cursorOffsetPitch, -90, 90);
@@ -272,10 +272,10 @@ public class CursorMenuPlugin extends JavaPlugin {
         ItemDisplay itemDisplay = playerItemDisplays.get(player);
         if (textDisplay == null || itemDisplay == null) return;
 
-        // Cập nhật tên hiển thị với giá trị yaw và pitch
+        // can remove it, add it for debug testing phase
         textDisplay.setCustomName(String.format("Cursor: Yaw %.1f | Pitch %.1f", yaw, pitch));
 
-        // Cập nhật hướng của item display
+        // update
         itemDisplay.setRotation(yaw, pitch);
 
         // Cập nhật vị trí của item display
