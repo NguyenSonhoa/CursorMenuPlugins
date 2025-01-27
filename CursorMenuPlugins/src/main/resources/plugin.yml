@@ -1,0 +1,24 @@
+name: CursorMenuPlugin
+main: com.example.ui.CursorMenuPlugin
+version: 1.0.0
+api-version: 1.21
+author: SonNguyen
+description: A plugin that creates an interactive UI menu using armor stands and ProtocolLib.
+depend: [PlaceholderAPI]
+
+commands:
+  reloadmenu:
+    description: Reload the plugin configuration.
+    usage: /reloadmenu
+    permission: cursorplugin.reload
+    permission-message: You do not have permission to use this command.
+  startmenu:
+    description: "Kích hoạt menu"
+    usage: "/startmenu"
+  stopmenu:
+    description: "Kích hoạt menu"
+    usage: "/stopmenu"
+permissions:
+  cursorplugin.reload:
+    description: Allows the player to reload the plugin configuration.
+    default: op

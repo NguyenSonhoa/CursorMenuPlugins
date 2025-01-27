@@ -1,0 +1,29 @@
+version: "1.1"
+
+menu:
+  cursor-offset:
+    yaw: 0
+    pitch: 1
+  camera-position:
+    world: "world"  # Tên thế giới nơi camera sẽ hoạt động
+    x: 0
+    y: 2
+    z: 0
+  layout:
+    layout1:
+      name: "Start"
+      MinYaw: 0
+      MaxYaw: 20
+      MinPitch: 1
+      MaxPitch: 10
+      command: "say test"
+      type: "player"
+    layout2:
+      name: "Options"
+      MinYaw: 21
+      MaxYaw: 40
+      MinPitch: 1
+      MaxPitch: 10
+      command: "say test"
+      type: "console"
+Debug: false
